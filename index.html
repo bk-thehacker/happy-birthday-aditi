@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Aditi - My Darling Laado ❤️ From Arjun</title>
+    <title>Happy Birthday Aditi - Meri Pyari Laado ❤️ From Arjun</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -129,19 +129,14 @@
             background: #ec4899;
             border-radius: 4px;
         }
-
-        /* Pulsing Glow */
-        @keyframes heartPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        .pulse-heart {
-            animation: heartPulse 1.5s infinite;
-        }
     </style>
 </head>
 <body class="relative min-h-screen">
+
+    <!-- Romantic Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Interactive Background Canvas -->
     <canvas id="bgCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
@@ -157,10 +152,10 @@
         <div class="flex items-center space-x-4">
             <button id="musicBtn" onclick="toggleAudio()" class="px-4 py-2 rounded-full glass-card text-xs md:text-sm text-pink-300 hover:text-white flex items-center gap-2 transition border border-pink-500/30 hover:border-pink-500">
                 <i id="musicIcon" class="fas fa-music text-pink-400"></i>
-                <span id="musicText">Play Love Melody</span>
+                <span id="musicText">Romantic Melody Bajao</span>
             </button>
             <a href="#mini-game" class="hidden md:flex px-4 py-2 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 text-xs text-white font-semibold shadow-lg hover:brightness-110 transition items-center gap-1">
-                <i class="fas fa-gamepad"></i> Play Heart Catcher
+                <i class="fas fa-gamepad"></i> Heart Catcher Khello
             </a>
         </div>
     </nav>
@@ -176,7 +171,7 @@
             <!-- Couple Badge -->
             <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-card border border-pink-500/40 text-pink-300 text-sm md:text-base font-medium mb-6 animate-pulse">
                 <i class="fas fa-crown text-amber-400"></i>
-                <span>Arjun's Forever Love & Princess</span>
+                <span>Arjun Ki Hamesha Ki Princess & Sweetheart</span>
                 <i class="fas fa-heart text-pink-500"></i>
             </div>
 
@@ -196,16 +191,16 @@
                 Happy Birthday <span class="bg-gradient-to-r from-pink-400 via-rose-300 to-purple-400 bg-clip-text text-transparent font-romantic px-2">Meri Laado</span>
             </h1>
             <p class="text-lg md:text-2xl text-pink-200/90 max-w-2xl font-light italic mb-6">
-                "To my sweetest Aditi — you bring magic to my everyday life, warmth to my heart, and endless love to Arjun."
+                "Meri sabse pyari Aditi ke liye — tum meri life mein magic, dil mein garmahat aur Arjun ke liye beshumar pyaar laati ho."
             </p>
 
             <!-- Action Buttons -->
             <div class="flex flex-wrap justify-center gap-4 mt-2">
                 <a href="#polaroids" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-semibold shadow-lg shadow-pink-500/30 hover:scale-105 transition duration-300 flex items-center gap-2">
-                    <i class="fas fa-heart-pulse"></i> Explore Our Gallery
+                    <i class="fas fa-heart-pulse"></i> Hamari Memories Dekho
                 </a>
                 <a href="#letter" class="px-8 py-3.5 rounded-full glass-card text-pink-300 hover:text-white font-semibold border border-pink-500/40 hover:bg-pink-500/20 hover:scale-105 transition duration-300 flex items-center gap-2">
-                    <i class="fas fa-envelope-open-text"></i> Arjun's Special Note
+                    <i class="fas fa-envelope-open-text"></i> Arjun Ka Special Khat
                 </a>
             </div>
         </section>
@@ -217,18 +212,18 @@
                     <i class="fas fa-birthday-cake text-9xl text-pink-300"></i>
                 </div>
                 <h2 class="text-2xl md:text-3xl font-bold text-pink-300 mb-2 flex items-center justify-center gap-2">
-                    <i class="fas fa-hourglass-half text-rose-400"></i> Birthday Countdown to 04 October
+                    <i class="fas fa-hourglass-half text-rose-400"></i> Birthday Countdown - 04 October Tak
                 </h2>
-                <p class="text-xs md:text-sm text-pink-200/70 mb-8">Counting down every second till Arjun's Darling celebrates her special day!</p>
+                <p class="text-xs md:text-sm text-pink-200/70 mb-8">Arjun ki Darling ke special day ke liye har ek second count ho raha hai!</p>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
                     <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
                         <span id="days" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
-                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Days</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Dini</span>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
                         <span id="hours" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
-                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Hours</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Ghante</span>
                     </div>
                     <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
                         <span id="minutes" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
@@ -242,7 +237,7 @@
 
                 <div class="mt-8 flex justify-center gap-3">
                     <button onclick="triggerConfetti()" class="px-6 py-2.5 rounded-full bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 border border-pink-500/40 text-sm font-medium transition flex items-center gap-2">
-                        <i class="fas fa-gift text-pink-400"></i> Surprise Fireworks Burst!
+                        <i class="fas fa-gift text-pink-400"></i> Surprise Fireworks Phodo!
                     </button>
                 </div>
             </div>
@@ -251,10 +246,10 @@
         <!-- Interactive Polaroid Gallery -->
         <section id="polaroids" class="py-16 px-4 max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <span class="text-pink-400 uppercase tracking-widest text-xs font-semibold">Memories of My Darling</span>
-                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Aditi's Cutest Moments</h2>
+                <span class="text-pink-400 uppercase tracking-widest text-xs font-semibold">Meri Darling Ki Yaadein</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Aditi Ke Sabse Cutest Moments</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-3"></div>
-                <p class="text-pink-200/70 text-sm md:text-base mt-3">Click on any Polaroid frame to view in full glowing splendor ✨</p>
+                <p class="text-pink-200/70 text-sm md:text-base mt-3">Kisi bhi Polaroid par click karke badi pic dekho ✨</p>
             </div>
 
             <!-- Grid of Polaroid Memory Frames -->
@@ -266,8 +261,8 @@
                         <img id="img-polaroid-0" src="1.jpg" alt="Aditi Selfie" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Pure Innocence & Charm</p>
-                        <p class="text-xs text-pink-600 font-medium">Captured with Arjun's Heart ❤️</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Innocence & Masoomiyat</p>
+                        <p class="text-xs text-pink-600 font-medium">Arjun Ke Dil Se Capture ❤️</p>
                     </div>
                 </div>
 
@@ -277,8 +272,8 @@
                         <img id="img-polaroid-1" src="2.jpg" alt="Aditi Pink Outfit" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Pretty in Pink Laado</p>
-                        <p class="text-xs text-pink-600 font-medium">That million dollar smile 😊</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Pink Dress Mein Pyari Laado</p>
+                        <p class="text-xs text-pink-600 font-medium">Woh Pyari Si Smile 😊</p>
                     </div>
                 </div>
 
@@ -288,8 +283,8 @@
                         <img id="img-polaroid-2" src="3.jpg" alt="Flower Hair Filter" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Flower Power Princess</p>
-                        <p class="text-xs text-pink-600 font-medium">Always blooming bright 🌸</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Phoolon Se Khilti Princess</p>
+                        <p class="text-xs text-pink-600 font-medium">Hamesha Aise Hi Khilke Hasso 🌸</p>
                     </div>
                 </div>
 
@@ -299,8 +294,8 @@
                         <img id="img-polaroid-3" src="4.jpg" alt="Dreamy Pose" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Dreamy Thoughts</p>
-                        <p class="text-xs text-pink-600 font-medium">Lost in Arjun's love 💫</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Khoyee Khoyee Si Ada</p>
+                        <p class="text-xs text-pink-600 font-medium">Kya Arjun Ke Khayalon Mein Ho? 💫</p>
                     </div>
                 </div>
 
@@ -310,8 +305,8 @@
                         <img id="img-polaroid-4" src="5.jpg" alt="Mehendi Bangles" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Ethnic Beauty & Mehendi</p>
-                        <p class="text-xs text-pink-600 font-medium">Traditional Perfection 🌿</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Mehendi Aur Chooriyan</p>
+                        <p class="text-xs text-pink-600 font-medium">Desi Look Mein No. 1 🌿</p>
                     </div>
                 </div>
 
@@ -321,8 +316,8 @@
                         <img id="img-polaroid-5" src="6.jpg" alt="Wavy Hair Portrait" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Beautiful Hair & Eyes</p>
-                        <p class="text-xs text-pink-600 font-medium">Arjun's Favorite Look ✨</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Pyare Baall Aur Aankhein</p>
+                        <p class="text-xs text-pink-600 font-medium">Arjun Ka Favorite Look ✨</p>
                     </div>
                 </div>
 
@@ -332,8 +327,8 @@
                         <img id="img-polaroid-6" src="7.jpg" alt="Purple Top Portrait" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Cozy Purple Vibe</p>
-                        <p class="text-xs text-pink-600 font-medium">So sweet & lovely 💜</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Purple Top Vibe</p>
+                        <p class="text-xs text-pink-600 font-medium">Bohot Cute Lag Rahi Ho 💜</p>
                     </div>
                 </div>
 
@@ -344,7 +339,7 @@
                     </div>
                     <div class="text-center">
                         <p class="font-cursive text-xl text-gray-800 font-bold">Floral Top Mirror Selfie</p>
-                        <p class="text-xs text-pink-600 font-medium">Classy & Elegant 🌺</p>
+                        <p class="text-xs text-pink-600 font-medium">Classy Aur Elegant 🌺</p>
                     </div>
                 </div>
 
@@ -354,8 +349,8 @@
                         <img id="img-polaroid-8" src="9.jpg" alt="Mirror Selfie Thumb Sign" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center">
-                        <p class="font-cursive text-xl text-gray-800 font-bold">Cute Mirror Pose</p>
-                        <p class="text-xs text-pink-600 font-medium">Always cheerful & fun 👍</p>
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Naughty & Cute Pose</p>
+                        <p class="text-xs text-pink-600 font-medium">Hamesha Mast Aur Khush 👍</p>
                     </div>
                 </div>
 
@@ -366,8 +361,8 @@
         <section class="py-16 px-4 max-w-6xl mx-auto">
             <div class="text-center mb-12">
                 <span class="text-pink-400 uppercase tracking-widest text-xs font-semibold">Special Surprises</span>
-                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Reasons Why Arjun Loves Aditi</h2>
-                <p class="text-pink-200/70 text-sm mt-2">Tap on any card to flip and discover Arjun's secret message</p>
+                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Arjun Aditi Se Kyun Pyaar Karta Hai?</h2>
+                <p class="text-pink-200/70 text-sm mt-2">Card par tap karo aur Arjun ka secret message read karo</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -379,15 +374,15 @@
                             <div class="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl mb-4">
                                 <i class="fas fa-smile-beam"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white">Your Magical Smile</h3>
-                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                            <h3 class="text-lg font-bold text-white">Tumhari Jaadui Smile</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Flip karne ke liye click karein ❤️</p>
                         </div>
                         <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-pink-900/80 to-purple-900/80 border border-pink-400/50">
                             <i class="fas fa-quote-left text-pink-400/40 text-2xl mb-2"></i>
                             <p class="text-sm italic text-pink-100 text-center">
-                                "Aditi, your smile lightens up Arjun's whole world. One look at you, and every stress disappears."
+                                "Aditi, tumhari ek hassi Arjun ki poori duniya ko roshan kar deti hai. Tumhe dekhte hi saari tension gayab!"
                             </p>
-                            <span class="text-xs text-pink-300 font-bold mt-4">— Forever Yours, Arjun</span>
+                            <span class="text-xs text-pink-300 font-bold mt-4">— Hamesha Tumhara, Arjun</span>
                         </div>
                     </div>
                 </div>
@@ -399,13 +394,13 @@
                             <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-4">
                                 <i class="fas fa-heart font-bold"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white">Your Caring Heart</h3>
-                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                            <h3 class="text-lg font-bold text-white">Tumhara Caring Dil</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Flip karne ke liye click karein ❤️</p>
                         </div>
                         <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-purple-900/80 to-rose-900/80 border border-purple-400/50">
                             <i class="fas fa-quote-left text-purple-400/40 text-2xl mb-2"></i>
                             <p class="text-sm italic text-pink-100 text-center">
-                                "The warmth you give, the way you care for Arjun and everyone around you makes you my ultimate blessing."
+                                "Jis tarah tum Arjun aur sabka khayal rakhti ho, tum meri life ki sabse badi blessing ho."
                             </p>
                             <span class="text-xs text-pink-300 font-bold mt-4">— Meri Laado Aditi</span>
                         </div>
@@ -419,17 +414,17 @@
                             <div class="w-16 h-16 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 text-2xl mb-4">
                                 <i class="fas fa-hand-holding-heart"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white">Family & Love</h3>
-                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                            <h3 class="text-lg font-bold text-white">Family Aur Pyaar</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Flip karne ke liye click karein ❤️</p>
                         </div>
                         <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-rose-900/80 to-pink-900/80 border border-rose-400/50">
                             <div class="w-16 h-16 rounded-full overflow-hidden border border-white mb-2">
                                 <img id="img-brother-card" src="1.jpg" class="w-full h-full object-cover">
                             </div>
                             <p class="text-xs italic text-pink-100 text-center">
-                                "Seeing your sweet side with your brother and family makes Arjun adore you even more!"
+                                "Apne bhai aur family ke saath tumhara pyara nature dekhkar Arjun tumhe aur bhi zyada chahta hai!"
                             </p>
-                            <span class="text-xs text-pink-300 font-bold mt-2">— Sweetest Sister & Girlfriend</span>
+                            <span class="text-xs text-pink-300 font-bold mt-2">— Sabse Pyari Sister & Girlfriend</span>
                         </div>
                     </div>
                 </div>
@@ -441,13 +436,13 @@
                             <div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4">
                                 <i class="fas fa-gem"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white">Our Future Together</h3>
-                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                            <h3 class="text-lg font-bold text-white">Hamara Saath Hamesha</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Flip karne ke liye click karein ❤️</p>
                         </div>
                         <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-amber-900/80 to-pink-900/80 border border-amber-400/50">
                             <i class="fas fa-infinity text-amber-400/40 text-2xl mb-2"></i>
                             <p class="text-sm italic text-pink-100 text-center">
-                                "Hand in hand, heart to heart. Arjun promises to love Aditi today, tomorrow, and forever."
+                                "Haath mein haath, dil se dil. Arjun ka promise hai Aditi se — aaj, kal aur hamesha sirf tumse pyaar karenge."
                             </p>
                             <span class="text-xs text-pink-300 font-bold mt-4">— Always & Forever</span>
                         </div>
@@ -462,10 +457,10 @@
             <div class="glass-card rounded-3xl p-6 md:p-10 border border-pink-500/40 shadow-2xl relative">
                 <div class="text-center mb-6">
                     <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-semibold border border-pink-500/30">
-                        <i class="fas fa-gamepad"></i> Mini Game for Laado
+                        <i class="fas fa-gamepad"></i> Laado Ke Liye Game
                     </span>
-                    <h2 class="text-2xl md:text-4xl font-bold text-white mt-2">Arjun's Heart Catcher</h2>
-                    <p class="text-xs md:text-sm text-pink-200/80 mt-1">Catch as many falling hearts as you can in 30 seconds for Arjun!</p>
+                    <h2 class="text-2xl md:text-4xl font-bold text-white mt-2">Arjun Ka Heart Catcher Game</h2>
+                    <p class="text-xs md:text-sm text-pink-200/80 mt-1">30 seconds mein Arjun ke girte hue hearts catch karo!</p>
                 </div>
 
                 <!-- Game Container -->
@@ -479,10 +474,10 @@
                     <!-- Start Screen Overlay -->
                     <div id="gameStartOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center p-6 text-center">
                         <i class="fas fa-heart-pulse text-6xl text-pink-500 mb-4 animate-bounce"></i>
-                        <h3 class="text-2xl font-bold text-white mb-2">Ready to Catch Arjun's Love?</h3>
-                        <p class="text-xs text-pink-200/80 mb-6 max-w-sm">Tap or move your bucket left & right to collect the glowing hearts!</p>
+                        <h3 class="text-2xl font-bold text-white mb-2">Arjun Ka Pyaar Catch Karne Ke Liye Ready Ho?</h3>
+                        <p class="text-xs text-pink-200/80 mb-6 max-w-sm">Bucket ko left-right karke saare glowing hearts collect karo!</p>
                         <button onclick="startGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition">
-                            Start Game ❤️
+                            Game Shuru Karo ❤️
                         </button>
                     </div>
 
@@ -517,34 +512,34 @@
                         <i class="fas fa-feather-alt"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-white">A Letter from Arjun's Heart</h2>
-                        <p class="text-xs text-pink-300">Written with pure devotion for Aditi</p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white">Arjun Ke Dil Se Pyara Khat</h2>
+                        <p class="text-xs text-pink-300">Sirf aur sirf Aditi ke liye likha gaya</p>
                     </div>
                 </div>
 
                 <!-- Typing / Formatted Letter Container -->
                 <div class="prose prose-invert max-w-none text-pink-100/90 text-sm md:text-lg leading-relaxed font-light space-y-4 bg-black/30 p-6 md:p-8 rounded-2xl border border-pink-500/20">
-                    <p class="font-bold text-pink-300 text-xl font-romantic">My Dearest Aditi (Meri Laado, My Darling),</p>
+                    <p class="font-bold text-pink-300 text-xl font-romantic">Meri Sabse Pyari Aditi (Meri Laado, My Darling),</p>
                     
                     <p id="typedLetter">
-                        On this beautiful day, I want to tell you how deeply you mean to me. From the very first moment you walked into my life, everything became brighter, sweeter, and infinitely more meaningful. Your smile is my daily dose of happiness, and your eyes carry a warmth that grounds me no matter what.
+                        Is khoobsurat din par, main tumhe batana chahta hoon ki tum mere liye kitni special ho. Jab se tum meri life mein aayi ho, har ek din khoobsurat, pyara aur khushiyon se bhar gaya hai. Tumhari hassi mere din ki sabse badi khushi hai, aur tumhari aakhon mein jo apnapan hai woh mujhe har waqt sukoon deta hai.
                     </p>
 
                     <p>
-                        You are not just my girlfriend, Aditi — you are my best friend, my safe space, and my favorite person to dream with. Every mirror selfie you take, every soft chuckle, every gesture showing your kind heart reminds me how truly blessed Arjun is to have you.
+                        Tum sirf meri girlfriend nahi ho Aditi — tum meri sabse acchi dost ho, mera safe zone ho, aur Arjun ki favorite person ho jiske saath main apne saare sapne dekhta hoon. Tumhari har ek mirror selfie, tumhari pyaari baatein aur tumhara accha dil mujhe yaad dilaata hai ki Arjun kitna lucky hai jo use tum mili ho.
                     </p>
 
                     <p>
-                        May this year bring you as much joy, peace, success, and overflowing laughter as you bring into my world every single day. I promise to stand by you, protect your sweet smile, celebrate all your milestones, and love you endlessly through every season of life.
+                        Khuda kare yeh naya saal tumhari life mein utni hi khushiyan, kamyabi aur hassi laye jitni tum meri life mein roz laati ho. Main promise karta hoon ki hamesha tumhare saath khada rahunga, tumhari pyari si smile ki hamesha hifazat karunga aur zindagi ke har mausam mein tumse behad pyaar karunga.
                     </p>
 
                     <div class="pt-6 border-t border-pink-500/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
-                            <span class="block text-xs uppercase text-pink-400 tracking-wider">With All My Love & Soul,</span>
-                            <span class="text-3xl font-romantic text-pink-300 font-bold">Forever Yours, Arjun ❤️</span>
+                            <span class="block text-xs uppercase text-pink-400 tracking-wider">Dil Ki Gehraiyon Se,</span>
+                            <span class="text-3xl font-romantic text-pink-300 font-bold">Hamesha Tumhara, Arjun ❤️</span>
                         </div>
                         <button onclick="triggerConfetti()" class="px-5 py-2 rounded-full bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 text-xs font-semibold border border-pink-500/30 transition flex items-center gap-2">
-                            <i class="fas fa-heart text-rose-400"></i> Send Heart Hugs
+                            <i class="fas fa-heart text-rose-400"></i> Pyaar Bhara Hug Bhejo
                         </button>
                     </div>
                 </div>
@@ -554,9 +549,9 @@
         <!-- Footer -->
         <footer class="py-8 text-center text-xs text-pink-300/60 border-t border-pink-500/20 mt-12">
             <p class="flex items-center justify-center gap-1">
-                Designed with endless love by <span class="text-pink-300 font-bold">Arjun</span> for <span class="text-pink-300 font-bold">Aditi</span> ❤️
+                Beshumar pyaar ke saath <span class="text-pink-300 font-bold">Arjun</span> ne banaya apni <span class="text-pink-300 font-bold">Aditi</span> ke liye ❤️
             </p>
-            <p class="mt-1 text-[10px] text-pink-400/40">Happy Birthday My Darling Laado • Always & Forever</p>
+            <p class="mt-1 text-[10px] text-pink-400/40">Happy Birthday Meri Darling Laado • Always & Forever</p>
         </footer>
 
     </main>
@@ -574,78 +569,45 @@
             <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between bg-black/50">
                 <div>
                     <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-semibold border border-pink-500/30 inline-block mb-3">
-                        Arjun's Princess
+                        Arjun Ki Princess
                     </span>
                     <h3 id="lightboxTitle" class="text-2xl font-bold text-white mb-2 font-cursive"></h3>
                     <p id="lightboxCaption" class="text-sm text-pink-100/80 leading-relaxed italic"></p>
                 </div>
                 <div class="mt-6 pt-4 border-t border-pink-500/20 flex justify-between items-center">
-                    <span class="text-xs text-pink-400 font-medium">With Love, Arjun ❤️</span>
+                    <span class="text-xs text-pink-400 font-medium">Pyaar Ke Saath, Arjun ❤️</span>
                     <button onclick="closeLightbox()" class="px-4 py-2 rounded-full bg-pink-600 text-white text-xs font-semibold hover:bg-pink-500 transition">
-                        Close
+                        Band Karo
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Audio Synthesis Generator (Romantic Tone) -->
+    <!-- JavaScript Logic -->
     <script>
-        let audioCtx = null;
+        // Audio Toggle Logic using real MP3 source
+        const bgMusic = document.getElementById('bgMusic');
         let isPlaying = false;
-        let melodyInterval = null;
 
         function toggleAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-
             const musicIcon = document.getElementById('musicIcon');
             const musicText = document.getElementById('musicText');
 
             if (isPlaying) {
-                clearInterval(melodyInterval);
+                bgMusic.pause();
                 isPlaying = false;
                 musicIcon.className = "fas fa-music text-pink-400";
-                musicText.innerText = "Play Love Melody";
+                musicText.innerText = "Romantic Melody Bajao";
             } else {
-                isPlaying = true;
-                musicIcon.className = "fas fa-pause text-pink-400";
-                musicText.innerText = "Pause Melody";
-                playRomanticMelody();
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = "fas fa-pause text-pink-400";
+                    musicText.innerText = "Music Rokne Ke Liye Click Karo";
+                }).catch(err => {
+                    console.log("Audio play error: ", err);
+                });
             }
-        }
-
-        function playNote(freq, duration) {
-            if (!audioCtx || !isPlaying) return;
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.value = freq;
-
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
-        function playRomanticMelody() {
-            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 329.63, 392.00];
-            let index = 0;
-
-            melodyInterval = setInterval(() => {
-                playNote(notes[index], 1.2);
-                index = (index + 1) % notes.length;
-            }, 600);
         }
 
         // Canvas Starfield Background
@@ -777,52 +739,52 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Lightbox Modal Data
+        // Lightbox Modal Data in Hinglish
         const galleryData = [
             {
                 img: '1.jpg',
-                title: 'Beautiful Selfie',
-                caption: 'Aditi looking naturally radiant in her white outfit. Arjun falls for this effortless beauty every single day!'
+                title: 'Masoom Pyari Selfie',
+                caption: 'Aditi is white dress mein kitni pyari lag rahi hai! Arjun har din tumhari is natural beauty par fida hota hai.'
             },
             {
                 img: '2.jpg',
-                title: 'Pretty in Pink',
-                caption: 'Her charming portrait in pink outfit with flowing hair. Aditi, you are Arjun’s forever favorite view.'
+                title: 'Pink Dress Mein Pari',
+                caption: 'Pink outfit aur khule baal mein tumhara pyara look. Aditi, tum Arjun ki favorite view ho.'
             },
             {
                 img: '3.jpg',
-                title: 'Flower Power Princess',
-                caption: 'That lovely flower filter look! Always bringing freshness and sunshine wherever you go.'
+                title: 'Phoolon Se Khilti Princess',
+                caption: 'Woh pyaara flower filter look! Jahan bhi jaati ho bas khushiyan hi khushiyan bikherti ho.'
             },
             {
                 img: '4.jpg',
-                title: 'Dreamy & Cute',
-                caption: 'Lying down with that thoughtful gaze. Wondering if you were thinking about Arjun right here?'
+                title: 'Khoyee Khoyee Pyari Ada',
+                caption: 'Aise let kar kiske khayalon mein khoyi ho? Kya Arjun ke baare mein soch rahi thi yahan?'
             },
             {
                 img: '5.jpg',
-                title: 'Mehendi & Bangles Elegance',
-                caption: 'Showing off intricate mehendi designs & sparkles. A true queen of grace & tradition.'
+                title: 'Mehendi Aur Chooriyon Ki Shaan',
+                caption: 'Hathon ki mehendi aur chooriyan dikhate hue. Desi grace mein tumhari koi match nahi.'
             },
             {
                 img: '6.jpg',
-                title: 'Gorgeous Wavy Hair',
-                caption: 'Soft dark waves and those enchanting eyes. Aditi, Arjun is completely mesmerized by you.'
+                title: 'Wavy Baall Aur Pyari Aankhein',
+                caption: 'Soft dark hair aur woh khoobsurat aankhein. Arjun tumhari is ada par poora fida hai.'
             },
             {
                 img: '7.jpg',
-                title: 'Cozy Purple Portrait',
-                caption: 'Looking so adorable in purple top. Every shade looks exquisite on Arjun’s Laado.'
+                title: 'Purple Top Mein Cute Look',
+                caption: 'Purple top mein bohot hi pyaari lag rahi ho. Har color Arjun ki Laado par suit karta hai.'
             },
             {
                 img: '8.jpg',
-                title: 'Floral Shirt Mirror Selfie',
-                caption: 'Classic mirror selfie with high style! You carry every outfit with absolute confidence.'
+                title: 'Floral Top Mirror Selfie',
+                caption: 'Full style ke saath mirror selfie! Har outfit ko tum bohot hi elegant tarike se pehenti ho.'
             },
             {
                 img: '9.jpg',
-                title: 'Cute Thumb Sign Pose',
-                caption: 'Playful thumb gesture! Loving your joyful spirit & positive energy always.'
+                title: 'Playful Thumbs Up Pose',
+                caption: 'Mast aur cute thumbs up pose! Tumhari positive energy aur hassi sabse best hai.'
             }
         ];
 
@@ -893,11 +855,11 @@
             overlay.classList.remove('hidden');
             overlay.innerHTML = `
                 <i class="fas fa-trophy text-5xl text-amber-400 mb-3 animate-bounce"></i>
-                <h3 class="text-2xl font-bold text-white mb-1">Amazing Job, Aditi! 🎉</h3>
-                <p class="text-sm text-pink-200 mb-2">You caught <span class="font-bold text-pink-400">${gameScore}</span> of Arjun's hearts!</p>
-                <p class="text-xs text-pink-300/80 mb-6 italic">"Arjun's Laado wins 100% of my love forever! 🏆"</p>
+                <h3 class="text-2xl font-bold text-white mb-1">Wah Aditi! Zabardast! 🎉</h3>
+                <p class="text-sm text-pink-200 mb-2">Tumne Arjun ke <span class="font-bold text-pink-400">${gameScore}</span> hearts catch kar liye!</p>
+                <p class="text-xs text-pink-300/80 mb-6 italic">"Arjun ki Laado ne mera 100% pyaar jeet liya! 🏆"</p>
                 <button onclick="startGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition">
-                    Play Again ❤️
+                    Phir Se Khello ❤️
                 </button>
             `;
             triggerConfetti();
