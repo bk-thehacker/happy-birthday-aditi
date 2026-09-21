@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Aditi - My Darling Laado ❤️ From Arjun</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0312;
+            color: #fce7f3;
+            overflow-x: hidden;
+        }
+
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-romantic {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .glow-purple {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(11, 3, 18, 0) 70%);
+        }
+
+        .glow-pink {
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(11, 3, 18, 0) 70%);
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 114, 182, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(244, 114, 182, 0.5);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.25);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1.5deg); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Polaroid Tilt Styles */
+        .polaroid-1 { transform: rotate(-3deg); }
+        .polaroid-2 { transform: rotate(2deg); }
+        .polaroid-3 { transform: rotate(-2deg); }
+        .polaroid-4 { transform: rotate(4deg); }
+
+        .polaroid-frame {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 12px 28px 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .polaroid-frame:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 20px 35px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Flip Card Animation */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0312;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 4px;
+        }
+
+        /* Pulsing Glow */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .pulse-heart {
+            animation: heartPulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <!-- Interactive Background Canvas -->
+    <canvas id="bgCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+    
+    <!-- Floating Hearts Overlay Canvas -->
+    <canvas id="heartsCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-1"></canvas>
+
+    <!-- Navigation / Top Control Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-pink-500/20">
+        <div class="flex items-center space-x-2">
+            <span class="text-pink-400 font-romantic text-2xl md:text-3xl font-bold">Arjun ❤️ Aditi</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="musicBtn" onclick="toggleAudio()" class="px-4 py-2 rounded-full glass-card text-xs md:text-sm text-pink-300 hover:text-white flex items-center gap-2 transition border border-pink-500/30 hover:border-pink-500">
+                <i id="musicIcon" class="fas fa-music text-pink-400"></i>
+                <span id="musicText">Play Love Melody</span>
+            </button>
+            <a href="#mini-game" class="hidden md:flex px-4 py-2 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 text-xs text-white font-semibold shadow-lg hover:brightness-110 transition items-center gap-1">
+                <i class="fas fa-gamepad"></i> Play Heart Catcher
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 pt-20">
+
+        <!-- Hero Section -->
+        <section class="min-h-[92vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+            <div class="absolute inset-0 glow-purple pointer-events-none"></div>
+            <div class="absolute inset-0 glow-pink pointer-events-none"></div>
+
+            <!-- Couple Badge -->
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-card border border-pink-500/40 text-pink-300 text-sm md:text-base font-medium mb-6 animate-pulse">
+                <i class="fas fa-crown text-amber-400"></i>
+                <span>Arjun's Forever Love & Princess</span>
+                <i class="fas fa-heart text-pink-500"></i>
+            </div>
+
+            <!-- Hero Image Frame with Glow -->
+            <div class="relative group cursor-pointer mb-8" onclick="openLightbox(0)">
+                <div class="absolute -inset-1.5 bg-gradient-to-r from-pink-600 via-purple-600 to-rose-500 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                <div class="relative w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-pink-400/80 shadow-2xl">
+                    <img id="img-hero" src="input_file_0.png" alt="Aditi My Darling" class="w-full h-full object-cover object-center transform group-hover:scale-110 transition duration-700">
+                </div>
+                <div class="absolute bottom-2 right-2 bg-pink-600 text-white p-2.5 rounded-full shadow-lg border-2 border-white">
+                    <i class="fas fa-sparkles text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-3">
+                Happy Birthday <span class="bg-gradient-to-r from-pink-400 via-rose-300 to-purple-400 bg-clip-text text-transparent font-romantic px-2">Meri Laado</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-pink-200/90 max-w-2xl font-light italic mb-6">
+                "To my sweetest Aditi — you bring magic to my everyday life, warmth to my heart, and endless love to Arjun."
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mt-2">
+                <a href="#polaroids" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-semibold shadow-lg shadow-pink-500/30 hover:scale-105 transition duration-300 flex items-center gap-2">
+                    <i class="fas fa-heart-pulse"></i> Explore Our Gallery
+                </a>
+                <a href="#letter" class="px-8 py-3.5 rounded-full glass-card text-pink-300 hover:text-white font-semibold border border-pink-500/40 hover:bg-pink-500/20 hover:scale-105 transition duration-300 flex items-center gap-2">
+                    <i class="fas fa-envelope-open-text"></i> Arjun's Special Note
+                </a>
+            </div>
+        </section>
+
+        <!-- Countdown Timer Section -->
+        <section class="py-12 px-4 max-w-5xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 md:p-10 border border-pink-500/30 text-center relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                    <i class="fas fa-birthday-cake text-9xl text-pink-300"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-pink-300 mb-2 flex items-center justify-center gap-2">
+                    <i class="fas fa-hourglass-half text-rose-400"></i> Birthday Countdown to 04 October
+                </h2>
+                <p class="text-xs md:text-sm text-pink-200/70 mb-8">Counting down every second till Arjun's Darling celebrates her special day!</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                    <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
+                        <span id="days" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Days</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
+                        <span id="hours" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Hours</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
+                        <span id="minutes" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Minutes</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/40 border border-pink-500/20">
+                        <span id="seconds" class="block text-3xl md:text-5xl font-extrabold text-pink-400">00</span>
+                        <span class="text-xs uppercase tracking-wider text-pink-200/70">Seconds</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center gap-3">
+                    <button onclick="triggerConfetti()" class="px-6 py-2.5 rounded-full bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 border border-pink-500/40 text-sm font-medium transition flex items-center gap-2">
+                        <i class="fas fa-gift text-pink-400"></i> Surprise Fireworks Burst!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Polaroid Gallery -->
+        <section id="polaroids" class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-pink-400 uppercase tracking-widest text-xs font-semibold">Memories of My Darling</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Aditi's Cutest Moments</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-3"></div>
+                <p class="text-pink-200/70 text-sm md:text-base mt-3">Click on any Polaroid frame to view in full glowing splendor ✨</p>
+            </div>
+
+            <!-- Grid of Polaroid Memory Frames -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 px-2 md:px-6">
+
+                <!-- Polaroid 1 -->
+                <div class="polaroid-frame polaroid-1 rounded-sm cursor-pointer" onclick="openLightbox(0)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-0" src="input_file_0.png" alt="Aditi Selfie" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Pure Innocence & Charm</p>
+                        <p class="text-xs text-pink-600 font-medium">Captured with Arjun's Heart ❤️</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 2 -->
+                <div class="polaroid-frame polaroid-2 rounded-sm cursor-pointer" onclick="openLightbox(1)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-1" src="input_file_1.png" alt="Aditi Pink Outfit" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Pretty in Pink Laado</p>
+                        <p class="text-xs text-pink-600 font-medium">That million dollar smile 😊</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 3 -->
+                <div class="polaroid-frame polaroid-3 rounded-sm cursor-pointer" onclick="openLightbox(2)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-2" src="input_file_2.png" alt="Flower Hair Filter" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Flower Power Princess</p>
+                        <p class="text-xs text-pink-600 font-medium">Always blooming bright 🌸</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 4 -->
+                <div class="polaroid-frame polaroid-4 rounded-sm cursor-pointer" onclick="openLightbox(3)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-3" src="input_file_3.png" alt="Dreamy Pose" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Dreamy Thoughts</p>
+                        <p class="text-xs text-pink-600 font-medium">Lost in Arjun's love 💫</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 5 -->
+                <div class="polaroid-frame polaroid-1 rounded-sm cursor-pointer" onclick="openLightbox(4)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-4" src="input_file_4.png" alt="Mehendi Bangles" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Ethnic Beauty & Mehendi</p>
+                        <p class="text-xs text-pink-600 font-medium">Traditional Perfection 🌿</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 6 -->
+                <div class="polaroid-frame polaroid-2 rounded-sm cursor-pointer" onclick="openLightbox(5)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-5" src="input_file_5.png" alt="Wavy Hair Portrait" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Beautiful Hair & Eyes</p>
+                        <p class="text-xs text-pink-600 font-medium">Arjun's Favorite Look ✨</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 7 -->
+                <div class="polaroid-frame polaroid-3 rounded-sm cursor-pointer" onclick="openLightbox(6)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-6" src="input_file_6.png" alt="Purple Top Portrait" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Cozy Purple Vibe</p>
+                        <p class="text-xs text-pink-600 font-medium">So sweet & lovely 💜</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 8 -->
+                <div class="polaroid-frame polaroid-4 rounded-sm cursor-pointer" onclick="openLightbox(7)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-7" src="input_file_7.png" alt="Mirror Selfie Floral" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Floral Top Mirror Selfie</p>
+                        <p class="text-xs text-pink-600 font-medium">Classy & Elegant 🌺</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 9 -->
+                <div class="polaroid-frame polaroid-1 rounded-sm cursor-pointer" onclick="openLightbox(8)">
+                    <div class="aspect-[3/4] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <img id="img-polaroid-8" src="input_file_8.png" alt="Mirror Selfie Thumb Sign" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center">
+                        <p class="font-cursive text-xl text-gray-800 font-bold">Cute Mirror Pose</p>
+                        <p class="text-xs text-pink-600 font-medium">Always cheerful & fun 👍</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Memory & Compliment Reveal Cards -->
+        <section class="py-16 px-4 max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-pink-400 uppercase tracking-widest text-xs font-semibold">Special Surprises</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-1 text-white">Reasons Why Arjun Loves Aditi</h2>
+                <p class="text-pink-200/70 text-sm mt-2">Tap on any card to flip and discover Arjun's secret message</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card 1 -->
+                <div class="flip-card h-72 cursor-pointer" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center border border-pink-500/30">
+                            <div class="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl mb-4">
+                                <i class="fas fa-smile-beam"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Your Magical Smile</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                        </div>
+                        <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-pink-900/80 to-purple-900/80 border border-pink-400/50">
+                            <i class="fas fa-quote-left text-pink-400/40 text-2xl mb-2"></i>
+                            <p class="text-sm italic text-pink-100 text-center">
+                                "Aditi, your smile lightens up Arjun's whole world. One look at you, and every stress disappears."
+                            </p>
+                            <span class="text-xs text-pink-300 font-bold mt-4">— Forever Yours, Arjun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flip-card h-72 cursor-pointer" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center border border-pink-500/30">
+                            <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-4">
+                                <i class="fas fa-heart font-bold"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Your Caring Heart</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                        </div>
+                        <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-purple-900/80 to-rose-900/80 border border-purple-400/50">
+                            <i class="fas fa-quote-left text-purple-400/40 text-2xl mb-2"></i>
+                            <p class="text-sm italic text-pink-100 text-center">
+                                "The warmth you give, the way you care for Arjun and everyone around you makes you my ultimate blessing."
+                            </p>
+                            <span class="text-xs text-pink-300 font-bold mt-4">— Meri Laado Aditi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flip-card h-72 cursor-pointer" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center border border-pink-500/30">
+                            <div class="w-16 h-16 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 text-2xl mb-4">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Family & Love</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                        </div>
+                        <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-rose-900/80 to-pink-900/80 border border-rose-400/50">
+                            <div class="w-16 h-16 rounded-full overflow-hidden border border-white mb-2">
+                                <img id="img-brother-card" src="input_file_9.png" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-xs italic text-pink-100 text-center">
+                                "Seeing your sweet side with your brother and family makes Arjun adore you even more!"
+                            </p>
+                            <span class="text-xs text-pink-300 font-bold mt-2">— Sweetest Sister & Girlfriend</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="flip-card h-72 cursor-pointer" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center border border-pink-500/30">
+                            <div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-4">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Our Future Together</h3>
+                            <p class="text-xs text-pink-300/70 mt-2">Click to flip ❤️</p>
+                        </div>
+                        <div class="flip-card-back glass-card p-6 flex flex-col items-center justify-center bg-gradient-to-br from-amber-900/80 to-pink-900/80 border border-amber-400/50">
+                            <i class="fas fa-infinity text-amber-400/40 text-2xl mb-2"></i>
+                            <p class="text-sm italic text-pink-100 text-center">
+                                "Hand in hand, heart to heart. Arjun promises to love Aditi today, tomorrow, and forever."
+                            </p>
+                            <span class="text-xs text-pink-300 font-bold mt-4">— Always & Forever</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Heart Catcher Mini Game -->
+        <section id="mini-game" class="py-16 px-4 max-w-4xl mx-auto">
+            <div class="glass-card rounded-3xl p-6 md:p-10 border border-pink-500/40 shadow-2xl relative">
+                <div class="text-center mb-6">
+                    <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-semibold border border-pink-500/30">
+                        <i class="fas fa-gamepad"></i> Mini Game for Laado
+                    </span>
+                    <h2 class="text-2xl md:text-4xl font-bold text-white mt-2">Arjun's Heart Catcher</h2>
+                    <p class="text-xs md:text-sm text-pink-200/80 mt-1">Catch as many falling hearts as you can in 30 seconds for Arjun!</p>
+                </div>
+
+                <!-- Game Container -->
+                <div class="relative w-full h-80 bg-black/60 rounded-2xl overflow-hidden border border-pink-500/30 shadow-inner flex flex-col justify-between p-4" id="gameArea">
+                    <!-- Scoreboard Overlay -->
+                    <div class="flex justify-between items-center z-10 bg-black/40 backdrop-blur-md px-4 py-2 rounded-xl border border-pink-500/20">
+                        <div class="text-pink-300 font-bold text-sm">Score: <span id="gameScore" class="text-white text-lg">0</span></div>
+                        <div class="text-amber-400 font-bold text-sm">Time: <span id="gameTimer" class="text-white text-lg">30</span>s</div>
+                    </div>
+
+                    <!-- Start Screen Overlay -->
+                    <div id="gameStartOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center p-6 text-center">
+                        <i class="fas fa-heart-pulse text-6xl text-pink-500 mb-4 animate-bounce"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Ready to Catch Arjun's Love?</h3>
+                        <p class="text-xs text-pink-200/80 mb-6 max-w-sm">Tap or move your bucket left & right to collect the glowing hearts!</p>
+                        <button onclick="startGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition">
+                            Start Game ❤️
+                        </button>
+                    </div>
+
+                    <!-- Falling Hearts Container -->
+                    <div id="heartsContainer" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+                    <!-- Player Bucket -->
+                    <div id="playerBucket" class="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 h-10 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg border border-pink-300/40 cursor-pointer touch-none">
+                        <i class="fas fa-shopping-basket"></i>
+                    </div>
+                </div>
+
+                <!-- Touch Control Buttons for Mobile -->
+                <div class="flex justify-between items-center mt-4 md:hidden">
+                    <button id="btnLeft" class="px-8 py-3 rounded-xl bg-pink-600/40 text-white active:bg-pink-600 text-lg border border-pink-500/30">
+                        <i class="fas fa-arrow-left"></i> Left
+                    </button>
+                    <button id="btnRight" class="px-8 py-3 rounded-xl bg-pink-600/40 text-white active:bg-pink-600 text-lg border border-pink-500/30">
+                        Right <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Romantic Letter Section -->
+        <section id="letter" class="py-16 px-4 max-w-4xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-pink-500/40 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl"></div>
+                
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 text-xl border border-pink-500/30">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white">A Letter from Arjun's Heart</h2>
+                        <p class="text-xs text-pink-300">Written with pure devotion for Aditi</p>
+                    </div>
+                </div>
+
+                <!-- Typing / Formatted Letter Container -->
+                <div class="prose prose-invert max-w-none text-pink-100/90 text-sm md:text-lg leading-relaxed font-light space-y-4 bg-black/30 p-6 md:p-8 rounded-2xl border border-pink-500/20">
+                    <p class="font-bold text-pink-300 text-xl font-romantic">My Dearest Aditi (Meri Laado, My Darling),</p>
+                    
+                    <p id="typedLetter">
+                        On this beautiful day, I want to tell you how deeply you mean to me. From the very first moment you walked into my life, everything became brighter, sweeter, and infinitely more meaningful. Your smile is my daily dose of happiness, and your eyes carry a warmth that grounds me no matter what.
+                    </p>
+
+                    <p>
+                        You are not just my girlfriend, Aditi — you are my best friend, my safe space, and my favorite person to dream with. Every mirror selfie you take, every soft chuckle, every gesture showing your kind heart reminds me how truly blessed Arjun is to have you.
+                    </p>
+
+                    <p>
+                        May this year bring you as much joy, peace, success, and overflowing laughter as you bring into my world every single day. I promise to stand by you, protect your sweet smile, celebrate all your milestones, and love you endlessly through every season of life.
+                    </p>
+
+                    <div class="pt-6 border-t border-pink-500/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="block text-xs uppercase text-pink-400 tracking-wider">With All My Love & Soul,</span>
+                            <span class="text-3xl font-romantic text-pink-300 font-bold">Forever Yours, Arjun ❤️</span>
+                        </div>
+                        <button onclick="triggerConfetti()" class="px-5 py-2 rounded-full bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 text-xs font-semibold border border-pink-500/30 transition flex items-center gap-2">
+                            <i class="fas fa-heart text-rose-400"></i> Send Heart Hugs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-xs text-pink-300/60 border-t border-pink-500/20 mt-12">
+            <p class="flex items-center justify-center gap-1">
+                Designed with endless love by <span class="text-pink-300 font-bold">Arjun</span> for <span class="text-pink-300 font-bold">Aditi</span> ❤️
+            </p>
+            <p class="mt-1 text-[10px] text-pink-400/40">Happy Birthday My Darling Laado • Always & Forever</p>
+        </footer>
+
+    </main>
+
+    <!-- Photo Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-pink-400 text-3xl transition">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="max-w-3xl w-full glass-card rounded-2xl overflow-hidden border border-pink-500/40 flex flex-col md:flex-row">
+            <div class="md:w-1/2 aspect-[3/4] bg-black flex items-center justify-center overflow-hidden">
+                <img id="lightboxImg" src="" class="w-full h-full object-contain">
+            </div>
+            <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between bg-black/50">
+                <div>
+                    <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-semibold border border-pink-500/30 inline-block mb-3">
+                        Arjun's Princess
+                    </span>
+                    <h3 id="lightboxTitle" class="text-2xl font-bold text-white mb-2 font-cursive"></h3>
+                    <p id="lightboxCaption" class="text-sm text-pink-100/80 leading-relaxed italic"></p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-pink-500/20 flex justify-between items-center">
+                    <span class="text-xs text-pink-400 font-medium">With Love, Arjun ❤️</span>
+                    <button onclick="closeLightbox()" class="px-4 py-2 rounded-full bg-pink-600 text-white text-xs font-semibold hover:bg-pink-500 transition">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Synthesis Generator (Romantic Tone) -->
+    <script>
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function toggleAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const musicIcon = document.getElementById('musicIcon');
+            const musicText = document.getElementById('musicText');
+
+            if (isPlaying) {
+                clearInterval(melodyInterval);
+                isPlaying = false;
+                musicIcon.className = "fas fa-music text-pink-400";
+                musicText.innerText = "Play Love Melody";
+            } else {
+                isPlaying = true;
+                musicIcon.className = "fas fa-pause text-pink-400";
+                musicText.innerText = "Pause Melody";
+                playRomanticMelody();
+            }
+        }
+
+        function playNote(freq, duration) {
+            if (!audioCtx || !isPlaying) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function playRomanticMelody() {
+            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 329.63, 392.00];
+            let index = 0;
+
+            melodyInterval = setInterval(() => {
+                playNote(notes[index], 1.2);
+                index = (index + 1) % notes.length;
+            }, 600);
+        }
+
+        // Canvas Starfield Background
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let stars = [];
+
+        function resizeBgCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor((bgCanvas.width * bgCanvas.height) / 7000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * bgCanvas.width,
+                    y: Math.random() * bgCanvas.height,
+                    radius: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.01 + 0.005
+                });
+            }
+        }
+
+        function animateBgCanvas() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                bgCtx.beginPath();
+                bgCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(244, 114, 182, ${Math.abs(star.alpha)})`;
+                bgCtx.fill();
+            });
+            requestAnimationFrame(animateBgCanvas);
+        }
+
+        window.addEventListener('resize', resizeBgCanvas);
+        resizeBgCanvas();
+        animateBgCanvas();
+
+        // Canvas Hearts Floating Particles
+        const heartsCanvas = document.getElementById('heartsCanvas');
+        const heartsCtx = heartsCanvas.getContext('2d');
+        let floatingHearts = [];
+
+        function resizeHeartsCanvas() {
+            heartsCanvas.width = window.innerWidth;
+            heartsCanvas.height = window.innerHeight;
+        }
+
+        function createFloatingHeart() {
+            return {
+                x: Math.random() * heartsCanvas.width,
+                y: heartsCanvas.height + 20,
+                size: Math.random() * 12 + 8,
+                speedY: Math.random() * 1.5 + 0.8,
+                speedX: (Math.random() - 0.5) * 0.8,
+                opacity: Math.random() * 0.6 + 0.4,
+                color: ['#ec4899', '#f43f5e', '#a855f7', '#fb7185'][Math.floor(Math.random() * 4)]
+            };
+        }
+
+        function drawHeart(ctx, x, y, size, color, opacity) {
+            ctx.save();
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            const topCurveHeight = size * 0.3;
+            ctx.moveTo(x, y + topCurveHeight);
+            ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
+            ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + size, x, y + size);
+            ctx.bezierCurveTo(x, y + size, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
+            ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function animateHeartsCanvas() {
+            heartsCtx.clearRect(0, 0, heartsCanvas.width, heartsCanvas.height);
+            if (floatingHearts.length < 25 && Math.random() < 0.08) {
+                floatingHearts.push(createFloatingHeart());
+            }
+
+            floatingHearts.forEach((h, index) => {
+                h.y -= h.speedY;
+                h.x += h.speedX;
+                drawHeart(heartsCtx, h.x, h.y, h.size, h.color, h.opacity);
+
+                if (h.y < -20) {
+                    floatingHearts.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(animateHeartsCanvas);
+        }
+
+        window.addEventListener('resize', resizeHeartsCanvas);
+        resizeHeartsCanvas();
+        animateHeartsCanvas();
+
+        // Birthday Countdown Timer logic (Target: October 04)
+        function updateCountdown() {
+            const now = new Date();
+            let currentYear = now.getFullYear();
+            let targetDate = new Date(`October 4, ${currentYear} 00:00:00`);
+
+            if (now > targetDate) {
+                targetDate = new Date(`October 4, ${currentYear + 1} 00:00:00`);
+            }
+
+            const diff = targetDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Lightbox Modal Data
+        const galleryData = [
+            {
+                img: 'input_file_0.png',
+                title: 'Beautiful Selfie',
+                caption: 'Aditi looking naturally radiant in her white outfit. Arjun falls for this effortless beauty every single day!'
+            },
+            {
+                img: 'input_file_1.png',
+                title: 'Pretty in Pink',
+                caption: 'Her charming portrait in pink outfit with flowing hair. Aditi, you are Arjun’s forever favorite view.'
+            },
+            {
+                img: 'input_file_2.png',
+                title: 'Flower Power Princess',
+                caption: 'That lovely flower filter look! Always bringing freshness and sunshine wherever you go.'
+            },
+            {
+                img: 'input_file_3.png',
+                title: 'Dreamy & Cute',
+                caption: 'Lying down with that thoughtful gaze. Wondering if you were thinking about Arjun right here?'
+            },
+            {
+                img: 'input_file_4.png',
+                title: 'Mehendi & Bangles Elegance',
+                caption: 'Showing off intricate mehendi designs & sparkles. A true queen of grace & tradition.'
+            },
+            {
+                img: 'input_file_5.png',
+                title: 'Gorgeous Wavy Hair',
+                caption: 'Soft dark waves and those enchanting eyes. Aditi, Arjun is completely mesmerized by you.'
+            },
+            {
+                img: 'input_file_6.png',
+                title: 'Cozy Purple Portrait',
+                caption: 'Looking so adorable in purple top. Every shade looks exquisite on Arjun’s Laado.'
+            },
+            {
+                img: 'input_file_7.png',
+                title: 'Floral Shirt Mirror Selfie',
+                caption: 'Classic mirror selfie with high style! You carry every outfit with absolute confidence.'
+            },
+            {
+                img: 'input_file_8.png',
+                title: 'Cute Thumb Sign Pose',
+                caption: 'Playful thumb gesture! Loving your joyful spirit & positive energy always.'
+            }
+        ];
+
+        function openLightbox(index) {
+            const data = galleryData[index];
+            if (!data) return;
+            document.getElementById('lightboxImg').src = data.img;
+            document.getElementById('lightboxTitle').innerText = data.title;
+            document.getElementById('lightboxCaption').innerText = data.caption;
+            document.getElementById('lightbox').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        function toggleFlip(card) {
+            card.classList.toggle('flipped');
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ec4899', '#f43f5e', '#a855f7', '#ffd1dc']
+            });
+        }
+
+        // Heart Catcher Mini Game Implementation
+        let gameScore = 0;
+        let gameTimer = 30;
+        let gameActive = false;
+        let gameInterval = null;
+        let heartSpawnInterval = null;
+        let bucketPos = 50; // percentage
+
+        const playerBucket = document.getElementById('playerBucket');
+        const gameArea = document.getElementById('gameArea');
+
+        function startGame() {
+            document.getElementById('gameStartOverlay').classList.add('hidden');
+            gameScore = 0;
+            gameTimer = 30;
+            gameActive = true;
+            document.getElementById('gameScore').innerText = gameScore;
+            document.getElementById('gameTimer').innerText = gameTimer;
+
+            document.getElementById('heartsContainer').innerHTML = '';
+
+            gameInterval = setInterval(() => {
+                gameTimer--;
+                document.getElementById('gameTimer').innerText = gameTimer;
+                if (gameTimer <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            heartSpawnInterval = setInterval(spawnGameHeart, 600);
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            clearInterval(heartSpawnInterval);
+
+            const overlay = document.getElementById('gameStartOverlay');
+            overlay.classList.remove('hidden');
+            overlay.innerHTML = `
+                <i class="fas fa-trophy text-5xl text-amber-400 mb-3 animate-bounce"></i>
+                <h3 class="text-2xl font-bold text-white mb-1">Amazing Job, Aditi! 🎉</h3>
+                <p class="text-sm text-pink-200 mb-2">You caught <span class="font-bold text-pink-400">${gameScore}</span> of Arjun's hearts!</p>
+                <p class="text-xs text-pink-300/80 mb-6 italic">"Arjun's Laado wins 100% of my love forever! 🏆"</p>
+                <button onclick="startGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition">
+                    Play Again ❤️
+                </button>
+            `;
+            triggerConfetti();
+        }
+
+        function spawnGameHeart() {
+            if (!gameActive) return;
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            const posX = Math.random() * (gameArea.clientWidth - 30);
+            
+            heart.className = 'absolute text-pink-500 text-2xl transition-transform pointer-events-none';
+            heart.style.left = `${posX}px`;
+            heart.style.top = '-30px';
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+
+            container.appendChild(heart);
+
+            let currentTop = -30;
+            const speed = Math.random() * 2 + 2;
+
+            const fall = setInterval(() => {
+                if (!gameActive) {
+                    clearInterval(fall);
+                    heart.remove();
+                    return;
+                }
+
+                currentTop += speed;
+                heart.style.top = `${currentTop}px`;
+
+                // Collision Detection with Bucket
+                const bucketRect = playerBucket.getBoundingClientRect();
+                const heartRect = heart.getBoundingClientRect();
+
+                if (
+                    heartRect.bottom >= bucketRect.top &&
+                    heartRect.top <= bucketRect.bottom &&
+                    heartRect.right >= bucketRect.left &&
+                    heartRect.left <= bucketRect.right
+                ) {
+                    gameScore += 10;
+                    document.getElementById('gameScore').innerText = gameScore;
+                    clearInterval(fall);
+                    heart.remove();
+                }
+
+                if (currentTop > gameArea.clientHeight) {
+                    clearInterval(fall);
+                    heart.remove();
+                }
+            }, 20);
+        }
+
+        // Bucket Controls
+        function moveBucket(percent) {
+            bucketPos = Math.max(10, Math.min(90, percent));
+            playerBucket.style.left = `${bucketPos}%`;
+        }
+
+        // Mouse & Touch movement over game area
+        gameArea.addEventListener('mousemove', (e) => {
+            const rect = gameArea.getBoundingClientRect();
+            const relX = e.clientX - rect.left;
+            const percent = (relX / rect.width) * 100;
+            moveBucket(percent);
+        });
+
+        gameArea.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                const rect = gameArea.getBoundingClientRect();
+                const relX = e.touches[0].clientX - rect.left;
+                const percent = (relX / rect.width) * 100;
+                moveBucket(percent);
+            }
+        });
+
+        // Mobile Button Controls
+        document.getElementById('btnLeft').addEventListener('click', () => {
+            moveBucket(bucketPos - 15);
+        });
+        document.getElementById('btnRight').addEventListener('click', () => {
+            moveBucket(bucketPos + 15);
+        });
+    </script>
+</body>
+</html>
